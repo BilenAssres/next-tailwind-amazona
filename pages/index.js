@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Image from 'next/image';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
@@ -33,7 +34,7 @@ export default function Home({ products, featuredProducts }) {
         {featuredProducts.map((product) => (
           <div key={product._id}>
             <Link href={`/product/${product.slug}`} passHref className="flex">
-              <img src={product.banner} alt={product.name} />
+              <Image src={product.banner} alt={product.name} />
             </Link>
           </div>
         ))}

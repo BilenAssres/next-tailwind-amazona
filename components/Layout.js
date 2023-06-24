@@ -39,7 +39,7 @@ export default function Layout({ title, children }) {
             <Link href="/" className="text-lg font-bold">
               Garage Sale Addis
             </Link>
-            <div className='flex'>
+            <div className="flex">
               <form
                 onSubmit={submitHandler}
                 className="mx-10  hidden  justify-center md:flex"
@@ -74,24 +74,15 @@ export default function Layout({ title, children }) {
                           Profile
                         </DropdownLink>
                       </Menu.Item>
+
                       <Menu.Item>
                         <DropdownLink
                           className="dropdown-link"
-                          href="/order-history"
+                          href="/admin/dashboard"
                         >
-                          Order History
+                          Admin Dashboard
                         </DropdownLink>
                       </Menu.Item>
-                      {session.user.isAdmin && (
-                        <Menu.Item>
-                          <DropdownLink
-                            className="dropdown-link"
-                            href="/admin/dashboard"
-                          >
-                            Admin Dashboard
-                          </DropdownLink>
-                        </Menu.Item>
-                      )}
                       <Menu.Item>
                         <a
                           className="dropdown-link"

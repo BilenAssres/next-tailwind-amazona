@@ -8,16 +8,20 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Link from 'next/link';
 
 export default function Home({ products, featuredProducts }) {
-  
-
-  
   return (
     <Layout title="Home Page">
       <Carousel showThumbs={false} autoPlay>
         {featuredProducts.map((product) => (
           <div key={product._id}>
             <Link href={`/product/${product.slug}`} passHref className="flex">
-              <Image src={product.banner} alt={product.name} />
+              <div className="w-full h-60">
+                <Image
+                  width={100}
+                  height={100}
+                  src={product.image}
+                  alt={product.name}
+                />
+              </div>
             </Link>
           </div>
         ))}
@@ -25,10 +29,7 @@ export default function Home({ products, featuredProducts }) {
       <h2 className="h2 my-4">Latest Products</h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
-          <ProductItem
-            product={product}
-            key={product.slug}
-          ></ProductItem>
+          <ProductItem product={product} key={product.slug}></ProductItem>
         ))}
       </div>
     </Layout>

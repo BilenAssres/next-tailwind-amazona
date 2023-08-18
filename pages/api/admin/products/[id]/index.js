@@ -30,12 +30,14 @@ const putHandler = async (req, res) => {
   if (product) {
     product.name = req.body.name;
     product.slug = req.body.slug;
-    product.price = req.body.price;
     product.category = req.body.category;
     product.image = req.body.image;
+    product.price = req.body.price;
     product.brand = req.body.brand;
     product.countInStock = req.body.countInStock;
     product.description = req.body.description;
+    product.isFeatured = req.body.isFeatured;
+    product.mobile = req.body.mobile;
     await product.save();
     await db.disconnect();
     res.send({ message: 'Product updated successfully' });

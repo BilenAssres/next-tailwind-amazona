@@ -51,11 +51,11 @@ export default function Layout({ title, children }) {
                   placeholder="Search products"
                 />
                 <button
-                  className="rounded rounded-tl-none rounded-bl-none bg-amber-300 p-1 text-sm dark:text-black"
+                  className="rounded rounded-tl-none rounded-bl-none bg-[#0e4408] p-1 text-sm "
                   type="submit"
                   id="button-addon2"
                 >
-                  <SearchIcon className="h-5 w-5"></SearchIcon>
+                  <SearchIcon className="h-5 w-5 text-white"></SearchIcon>
                 </button>
               </form>
               <div className="flex items-center z-10">

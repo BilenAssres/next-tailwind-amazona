@@ -11,11 +11,15 @@ export default function ProductScreen(props) {
     return <Layout title="Produt Not Found">Produt Not Found</Layout>;
   }
 
-
   return (
     <Layout title={product.name}>
       <div className="py-2">
-        <Link href="/">back to products</Link>
+        <Link
+          href="/"
+          className="text-white bg-[#0e4408] p-2 rounded font-bold"
+        >
+          &#60;
+        </Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
@@ -34,31 +38,30 @@ export default function ProductScreen(props) {
         <div>
           <ul>
             <li>
-              <h1 className="text-lg">{product.name}</h1>
+              <h1 className="text-lg">Product name: {product.name}</h1>
             </li>
             <li>Category: {product.category}</li>
             <li>Brand: {product.brand}</li>
-            <li>
-              {product.rating} of {product.numReviews} reviews
-            </li>
             <li>Description: {product.description}</li>
+            <li>Mobile: {product.mobile}</li>
+            <li>Status: {product.status}</li>
           </ul>
         </div>
         <div>
           <div className="card p-5">
             <div className="mb-2 flex justify-between">
               <div>Price</div>
-              <div>${product.price}</div>
+              <div>ETB {product.price}</div>
             </div>
             <div className="mb-2 flex justify-between">
               <div>Status</div>
               <div>{product.countInStock > 0 ? 'In stock' : 'Unavailable'}</div>
             </div>
-            <button
-              className="primary-button w-full"
-            >
-              Add to cart
-            </button>
+
+            <a className="primary-button w-full" href={`tel:${product.mobile}`}>
+              <i className="fas fa-phone"></i>
+              <span className="ml-2">Call: {product.mobile}</span>
+            </a>
           </div>
         </div>
       </div>

@@ -87,17 +87,12 @@ function AdminDashboardScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div>
-              <div className="grid grid-cols-1 md:grid-cols-4">
+              <div className="grid grid-cols-1 md:grid-cols-2">
                 
                 <div className="card m-5 p-5">
                   <p className="text-3xl">{summary.productsCount} </p>
                   <p>Products</p>
-                  <Link href="/admin/products">View products</Link>
-                </div>
-                <div className="card m-5 p-5">
-                  <p className="text-3xl">{summary.usersCount} </p>
-                  <p>Users</p>
-                  <Link href="/admin/users">View users</Link>
+                  <Link href="/admin/products" >View products</Link>
                 </div>
               </div>
              

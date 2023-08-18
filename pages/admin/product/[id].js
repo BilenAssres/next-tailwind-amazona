@@ -68,6 +68,8 @@ export default function AdminProductEditScreen() {
         setValue('brand', data.brand);
         setValue('countInStock', data.countInStock);
         setValue('description', data.description);
+        setValue('mobile', data.mobile);
+        setValue('isFeatured', data.isFeatured);
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
@@ -111,6 +113,8 @@ export default function AdminProductEditScreen() {
     brand,
     countInStock,
     description,
+    mobile,
+    isFeatured
   }) => {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
@@ -123,11 +127,14 @@ export default function AdminProductEditScreen() {
         brand,
         countInStock,
         description,
+        mobile,
+        isFeatured
       });
       dispatch({ type: 'UPDATE_SUCCESS' });
       toast.success('Product updated successfully');
       router.push('/admin/products');
     } catch (err) {
+      console.log(err);
       dispatch({ type: 'UPDATE_FAIL', payload: getError(err) });
       toast.error(getError(err));
     }
@@ -290,6 +297,22 @@ export default function AdminProductEditScreen() {
                 {errors.description && (
                   <div className="text-red-500">
                     {errors.description.message}
+                  </div>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="countInStock">mobile</label>
+                <input
+                  type="text"
+                  className="w-full"
+                  id="mobile"
+                  {...register('mobile', {
+                    required: 'Please enter mobile',
+                  })}
+                />
+                {errors.mobile && (
+                  <div className="text-red-500">
+                    {errors.mobile.message}
                   </div>
                 )}
               </div>

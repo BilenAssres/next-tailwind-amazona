@@ -59,6 +59,7 @@ export default function Layout({ title, children }) {
                 </button>
               </form>
               <div className="flex items-center z-10">
+               
                 {status === 'loading' ? (
                   'Loading'
                 ) : session?.user ? (

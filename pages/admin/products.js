@@ -30,7 +30,7 @@ function reducer(state, action) {
       return { ...state, loadingDelete: false, successDelete: false };
 
     default:
-      state;
+      return state;
   }
 }
 export default function AdminProdcutsScreen() {
@@ -46,9 +46,6 @@ export default function AdminProdcutsScreen() {
   });
 
   const createHandler = async () => {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
     try {
       dispatch({ type: 'CREATE_REQUEST' });
       const { data } = await axios.post(`/api/admin/products`);
@@ -79,16 +76,10 @@ export default function AdminProdcutsScreen() {
   }, [successDelete]);
 
   const deleteHandler = async (productId) => {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
     try {
-      dispatch({ type: 'DELETE_REQUEST' });
       await axios.delete(`/api/admin/products/${productId}`);
-      dispatch({ type: 'DELETE_SUCCESS' });
       toast.success('Product deleted successfully');
     } catch (err) {
-      dispatch({ type: 'DELETE_FAIL' });
       toast.error(getError(err));
     }
   };
@@ -112,6 +103,9 @@ export default function AdminProdcutsScreen() {
           <div className="flex justify-between">
             <h1 className="mb-4 text-xl">Products</h1>
             {loadingDelete && <div>Deleting item...</div>}
+            <Link href="/admin/product/new" className="primary-button">
+              Create
+            </Link>
             <button
               disabled={loadingCreate}
               onClick={createHandler}
@@ -133,8 +127,7 @@ export default function AdminProdcutsScreen() {
                     <th className="p-5 text-left">NAME</th>
                     <th className="p-5 text-left">PRICE</th>
                     <th className="p-5 text-left">CATEGORY</th>
-                    <th className="p-5 text-left">COUNT</th>
-                    <th className="p-5 text-left">RATING</th>
+                    <th className="p-5 text-left">IS SOLD OUT</th>
                     <th className="p-5 text-left">ACTIONS</th>
                   </tr>
                 </thead>
@@ -145,9 +138,8 @@ export default function AdminProdcutsScreen() {
                       <td className=" p-5 ">{product.name}</td>
                       <td className=" p-5 ">${product.price}</td>
                       <td className=" p-5 ">{product.category}</td>
-                      <td className=" p-5 ">{product.countInStock}</td>
-                      <td className=" p-5 ">{product.rating}</td>
-                      <td className=" p-5 ">
+                      <td className=" p-5 ">{product.isSoldOut ? 'Sold Out' : 'Available'}</td>
+                      <td className=" space-x-2 ">
                         <Link
                           href={`/admin/product/${product._id}`}
                           type="button"
@@ -162,6 +154,13 @@ export default function AdminProdcutsScreen() {
                           type="button"
                         >
                           Delete
+                        </button>
+                        <button
+                          
+                          className="default-button !bg-red-500 !text-white"
+                          type="button"
+                        >
+                          Sold Out
                         </button>
                       </td>
                     </tr>

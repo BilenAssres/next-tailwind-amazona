@@ -55,7 +55,7 @@ export default function ProductScreen(props) {
             </div>
             <div className="mb-2 flex justify-between">
               <div>Status</div>
-              <div>{product.countInStock > 0 ? 'In stock' : 'Unavailable'}</div>
+              <div>{product.isSoldOut > 0 ? 'In stock' : 'Unavailable'}</div>
             </div>
 
             <a className="primary-button w-full" href={`tel:${product.mobile}`}>

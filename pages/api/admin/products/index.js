@@ -24,7 +24,7 @@ const postHandler = async (req, res) => {
     price: 0,
     category: 'sample category',
     brand: 'sample brand',
-    countInStock: 0,
+    isSoldOut: 0,
     description: 'sample description',
     rating: 0,
     numReviews: 0,

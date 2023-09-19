@@ -7,8 +7,10 @@ const handler = async (req, res) => {
   if (!user || (user && !user.isAdmin)) {
     return res.status(401).send('signin required');
   }
-
-  if (req.method === 'GET') {
+  if (req.method === 'POST') {
+    return postHandler(req, res, user);
+  }
+  else if (req.method === 'GET') {
     return getHandler(req, res, user);
   } else if (req.method === 'PUT') {
     return putHandler(req, res, user);
@@ -24,6 +26,41 @@ const getHandler = async (req, res) => {
   await db.disconnect();
   res.send(product);
 };
+const postHandler = async (req, res) => {
+  return res.status(400).send({message: 'here'});
+  // await db.connect();
+
+  // const {
+  //   name,
+  //   slug,
+  //   category,
+  //   image,
+  //   price,
+  //   brand,
+  //   isSoldOut,
+  //   description,
+  //   isFeatured,
+  //   mobile,
+  // } = req.body;
+
+  // const product = new Product({
+  //   name,
+  //   slug,
+  //   category,
+  //   image,
+  //   price,
+  //   brand,
+  //   isSoldOut,
+  //   description,
+  //   isFeatured,
+  //   mobile,
+  // });
+
+  // await product.save();
+  // await db.disconnect();
+
+  // res.status(201).send({ message: 'Product created successfully' });
+};
 const putHandler = async (req, res) => {
   await db.connect();
   const product = await Product.findById(req.query.id);
@@ -34,7 +71,7 @@ const putHandler = async (req, res) => {
     product.image = req.body.image;
     product.price = req.body.price;
     product.brand = req.body.brand;
-    product.countInStock = req.body.countInStock;
+    product.isSoldOut = req.body.isSoldOut;
     product.description = req.body.description;
     product.isFeatured = req.body.isFeatured;
     product.mobile = req.body.mobile;
@@ -50,7 +87,7 @@ const deleteHandler = async (req, res) => {
   await db.connect();
   const product = await Product.findById(req.query.id);
   if (product) {
-    await product.remove();
+    await product.deleteOne();
     await db.disconnect();
     res.send({ message: 'Product deleted successfully' });
   } else {

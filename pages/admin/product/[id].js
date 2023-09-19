@@ -61,15 +61,10 @@ export default function AdminProductEditScreen() {
         const { data } = await axios.get(`/api/admin/products/${productId}`);
         dispatch({ type: 'FETCH_SUCCESS' });
         setValue('name', data.name);
-        setValue('slug', data.slug);
         setValue('price', data.price);
         setValue('image', data.image);
-        setValue('category', data.category);
-        setValue('brand', data.brand);
-        setValue('countInStock', data.countInStock);
         setValue('description', data.description);
         setValue('mobile', data.mobile);
-        setValue('isFeatured', data.isFeatured);
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
@@ -106,29 +101,19 @@ export default function AdminProductEditScreen() {
 
   const submitHandler = async ({
     name,
-    slug,
     price,
-    category,
     image,
-    brand,
-    countInStock,
     description,
     mobile,
-    isFeatured
   }) => {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(`/api/admin/products/${productId}`, {
         name,
-        slug,
         price,
-        category,
         image,
-        brand,
-        countInStock,
         description,
         mobile,
-        isFeatured
       });
       dispatch({ type: 'UPDATE_SUCCESS' });
       toast.success('Product updated successfully');
@@ -148,17 +133,13 @@ export default function AdminProductEditScreen() {
             <li>
               <Link href="/admin/dashboard">Dashboard</Link>
             </li>
-            <li>
-              <Link href="/admin/orders">Orders</Link>
-            </li>
+            
             <li>
               <Link href="/admin/products" className="font-bold">
                 Products
               </Link>
             </li>
-            <li>
-              <Link href="/admin/users">Users</Link>
-            </li>
+            
           </ul>
         </div>
         <div className="md:col-span-3">
@@ -187,20 +168,7 @@ export default function AdminProductEditScreen() {
                   <div className="text-red-500">{errors.name.message}</div>
                 )}
               </div>
-              <div className="mb-4">
-                <label htmlFor="slug">Slug</label>
-                <input
-                  type="text"
-                  className="w-full"
-                  id="slug"
-                  {...register('slug', {
-                    required: 'Please enter slug',
-                  })}
-                />
-                {errors.slug && (
-                  <div className="text-red-500">{errors.slug.message}</div>
-                )}
-              </div>
+             
               <div className="mb-4">
                 <label htmlFor="price">Price</label>
                 <input
@@ -215,20 +183,7 @@ export default function AdminProductEditScreen() {
                   <div className="text-red-500">{errors.price.message}</div>
                 )}
               </div>
-              <div className="mb-4">
-                <label htmlFor="image">image</label>
-                <input
-                  type="text"
-                  className="w-full"
-                  id="image"
-                  {...register('image', {
-                    required: 'Please enter image',
-                  })}
-                />
-                {errors.image && (
-                  <div className="text-red-500">{errors.image.message}</div>
-                )}
-              </div>
+              {}
               <div className="mb-4">
                 <label htmlFor="imageFile">Upload image</label>
                 <input
@@ -240,52 +195,10 @@ export default function AdminProductEditScreen() {
 
                 {loadingUpload && <div>Uploading....</div>}
               </div>
+              
+           
               <div className="mb-4">
-                <label htmlFor="category">category</label>
-                <input
-                  type="text"
-                  className="w-full"
-                  id="category"
-                  {...register('category', {
-                    required: 'Please enter category',
-                  })}
-                />
-                {errors.category && (
-                  <div className="text-red-500">{errors.category.message}</div>
-                )}
-              </div>
-              <div className="mb-4">
-                <label htmlFor="brand">brand</label>
-                <input
-                  type="text"
-                  className="w-full"
-                  id="brand"
-                  {...register('brand', {
-                    required: 'Please enter brand',
-                  })}
-                />
-                {errors.brand && (
-                  <div className="text-red-500">{errors.brand.message}</div>
-                )}
-              </div>
-              <div className="mb-4">
-                <label htmlFor="countInStock">countInStock</label>
-                <input
-                  type="text"
-                  className="w-full"
-                  id="countInStock"
-                  {...register('countInStock', {
-                    required: 'Please enter countInStock',
-                  })}
-                />
-                {errors.countInStock && (
-                  <div className="text-red-500">
-                    {errors.countInStock.message}
-                  </div>
-                )}
-              </div>
-              <div className="mb-4">
-                <label htmlFor="countInStock">description</label>
+                <label htmlFor="isSoldOut">description</label>
                 <input
                   type="text"
                   className="w-full"
@@ -301,7 +214,7 @@ export default function AdminProductEditScreen() {
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="countInStock">mobile</label>
+                <label htmlFor="mobile">mobile</label>
                 <input
                   type="text"
                   className="w-full"
